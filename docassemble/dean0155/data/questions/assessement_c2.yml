@@ -1,0 +1,66 @@
+---
+mandatory: True
+question: Welcome!
+subquestion: | 
+  ### This will give you the correct form for your claim
+  
+  At the end of this submission, please make sure your form is checked by a lawyer!
+  
+buttons:
+  - I'm done: exit
+    url: https://court.sa.gov.au
+  - Continue: continue
+
+  Information|Your imput
+  -----------|-------
+Salutation            |${ ODsalutation }
+First Name            |${ ODfirstname }
+Last Name             |${ ODlastname }
+Your age              |${ ODage }
+Are you employed?     |${ ODisemployed }
+Your annual income    |${ currency(ODannualincome) }
+Type of form          |${ formtype }
+default: Supreme Court 
+---
+question: What is your name?
+fields:
+  - Salutation: ODsalutation
+    choices:
+      - Dr
+      - Mr
+      - Mrs
+      - Ms
+  - First Name: ODfirstname
+  - Last Name: ODlastname
+  - How old are you?
+fields:
+  - no label: ODage
+    datatype: integer
+  -  Are you employed?: oDemployed
+    datatype: radio
+    choices:
+      - Yes
+      - No
+- Annual income: ODannualincome
+  datatype: currency
+    show if: 
+      variable: ODemployed
+      is: 'Yes'
+  - Type of form: ${ formtype }
+    Choices:
+      - Magistrates Court
+      - District Court
+      - Supreme Court
+      - Federal Circuit Court
+      - Federal Court
+  show form 1 if: 
+      variable: type of form 
+      is: 'Supreme Court'  
+
+application can only be used to complete a SASC Form 1
+
+
+
+   
+   
+  
